@@ -1,16 +1,8 @@
--- Drop foreign key constraints
-ALTER TABLE E01_DETALLE_FACTURA DROP CONSTRAINT IF EXISTS FK_E01_DETALLE_FACTURA_PRODUCTO;
-ALTER TABLE E01_DETALLE_FACTURA DROP CONSTRAINT IF EXISTS FK_E01_DETALLE_FACTURA_FACTURA;
-ALTER TABLE E01_FACTURA DROP CONSTRAINT IF EXISTS FK_E01_FACTURA_CLIENTE;
-ALTER TABLE E01_TELEFONO DROP CONSTRAINT IF EXISTS FK_E01_TELEFONO_CLIENTE;
+-- 
 
--- Drop tables if they exist
-DROP TABLE IF EXISTS E01_DETALLE_FACTURA;
-DROP TABLE IF EXISTS E01_FACTURA;
-DROP TABLE IF EXISTS E01_TELEFONO;
-DROP TABLE IF EXISTS E01_PRODUCTO;
-DROP TABLE IF EXISTS E01_CLIENTE;
+-- TABLE: E01_CLIENTE 
 
+--
 
 
 
@@ -29,22 +21,14 @@ CREATE TABLE E01_CLIENTE(
     CONSTRAINT PK_E01_CLIENTE PRIMARY KEY (nro_cliente)
 
 )
-
 ;
 
 
+-- 
 
-
-
-
-
---
-
--- TABLE: E01_DETALLE_FACTURA
+-- TABLE: E01_DETALLE_FACTURA 
 
 --
-
-
 
 CREATE TABLE E01_DETALLE_FACTURA(
 
@@ -59,21 +43,13 @@ CREATE TABLE E01_DETALLE_FACTURA(
     CONSTRAINT PK_E01_DETALLE_FACTURA PRIMARY KEY (nro_factura, codigo_producto)
 
 )
-
 ;
 
+-- 
 
-
-
-
-
+-- TABLE: E01_FACTURA 
 
 --
-
--- TABLE: E01_FACTURA
-
---
-
 
 
 CREATE TABLE E01_FACTURA(
@@ -82,9 +58,9 @@ CREATE TABLE E01_FACTURA(
 
     fecha            DATE       NOT NULL,
 
-    total_sin_iva    DOUBLE PRECISION     NOT NULL,
+    total_sin_iva    DOUBLE PRECISION    NOT NULL,
 
-    iva              DOUBLE PRECISION     NOT NULL,
+    iva              DOUBLE PRECISION    NOT NULL,
 
     total_con_iva    DOUBLE PRECISION,
 
@@ -93,18 +69,11 @@ CREATE TABLE E01_FACTURA(
     CONSTRAINT PK_E01_FACTURA PRIMARY KEY (nro_factura)
 
 )
-
 ;
 
+-- 
 
-
-
-
-
-
---
-
--- TABLE: E01_PRODUCTO
+-- TABLE: E01_PRODUCTO 
 
 --
 
@@ -127,21 +96,14 @@ CREATE TABLE E01_PRODUCTO(
     CONSTRAINT PK_E01_PRODUCTO PRIMARY KEY (codigo_producto)
 
 )
-
 ;
 
 
+-- 
 
-
-
-
-
---
-
--- TABLE: E01_TELEFONO
+-- TABLE: E01_TELEFONO 
 
 --
-
 
 
 CREATE TABLE E01_TELEFONO(
@@ -157,22 +119,14 @@ CREATE TABLE E01_TELEFONO(
     CONSTRAINT PK_E01_TELEFONO PRIMARY KEY (codigo_area, nro_telefono)
 
 )
-
 ;
 
 
+-- 
 
-
-
-
-
---
-
--- TABLE: E01_DETALLE_FACTURA
+-- TABLE: E01_DETALLE_FACTURA 
 
 --
-
-
 
 ALTER TABLE E01_DETALLE_FACTURA ADD CONSTRAINT FK_E01_DETALLE_FACTURA_PRODUCTO
     FOREIGN KEY (codigo_producto)
@@ -182,8 +136,7 @@ ALTER TABLE E01_DETALLE_FACTURA ADD CONSTRAINT FK_E01_DETALLE_FACTURA_PRODUCTO
 ;
 
 
-
-ALTER TABLE E01_DETALLE_FACTURA ADD CONSTRAINT FK_E01_DETALLE_FACTURA_FACTURA
+ALTER TABLE E01_DETALLE_FACTURA ADD CONSTRAINT FK_E01_DETALLE_FACTURA_FACTURA 
 
     FOREIGN KEY (nro_factura)
 
@@ -192,18 +145,13 @@ ALTER TABLE E01_DETALLE_FACTURA ADD CONSTRAINT FK_E01_DETALLE_FACTURA_FACTURA
 ;
 
 
+-- 
 
-
-
---
-
--- TABLE: E01_FACTURA
+-- TABLE: E01_FACTURA 
 
 --
 
-
-
-ALTER TABLE E01_FACTURA ADD CONSTRAINT FK_E01_FACTURA_CLIENTE
+ALTER TABLE E01_FACTURA ADD CONSTRAINT FK_E01_FACTURA_CLIENTE 
 
     FOREIGN KEY (nro_cliente)
 
@@ -213,17 +161,14 @@ ALTER TABLE E01_FACTURA ADD CONSTRAINT FK_E01_FACTURA_CLIENTE
 
 
 
+-- 
 
-
---
-
--- TABLE: E01_TELEFONO
+-- TABLE: E01_TELEFONO 
 
 --
 
 
-
-ALTER TABLE E01_TELEFONO ADD CONSTRAINT FK_E01_TELEFONO_CLIENTE
+ALTER TABLE E01_TELEFONO ADD CONSTRAINT FK_E01_TELEFONO_CLIENTE 
 
     FOREIGN KEY (nro_cliente)
 
@@ -569,7 +514,7 @@ INSERT INTO E01_PRODUCTO (codigo_producto,marca,nombre,descripcion,precio,stock)
 INSERT INTO E01_PRODUCTO (codigo_producto,marca,nombre,descripcion,precio,stock) VALUES (32,'Montes Nascetur Incorporated','cosmetics','purus. Nullam scelerisque','926.60',203);
 INSERT INTO E01_PRODUCTO (codigo_producto,marca,nombre,descripcion,precio,stock) VALUES (33,'Turpis Nulla Corp.',' drugstore ','pede, nonummy ut,','472.49',496);
 INSERT INTO E01_PRODUCTO (codigo_producto,marca,nombre,descripcion,precio,stock) VALUES (34,'Eu Eleifend Nec Associates','canned goods','orci sem eget','715.37',676);
-INSERT INTO E01_PRODUCTO (codigo_producto,marca,nombre,descripcion,precio,stock) VALUES (35,'Euismod Incorporated',E'chemist\'s ','enim. Nunc ut','762.66',139);
+INSERT INTO E01_PRODUCTO (codigo_producto,marca,nombre,descripcion,precio,stock) VALUES (35,'Euismod Incorporated','chemists ','enim. Nunc ut','762.66',139);
 INSERT INTO E01_PRODUCTO (codigo_producto,marca,nombre,descripcion,precio,stock) VALUES (36,'Congue A Aliquet Corp.','sales assistant','diam nunc, ullamcorper','758.82',778);
 INSERT INTO E01_PRODUCTO (codigo_producto,marca,nombre,descripcion,precio,stock) VALUES (37,'Sed Dui Fusce LLC','coin','eleifend nec, malesuada','282.07',954);
 INSERT INTO E01_PRODUCTO (codigo_producto,marca,nombre,descripcion,precio,stock) VALUES (38,'Arcu Incorporated','bag','justo eu arcu.','53.83',681);
@@ -3044,12 +2989,12 @@ INSERT INTO E01_DETALLE_FACTURA (nro_factura,codigo_producto,nro_item,cantidad) 
 INSERT INTO E01_DETALLE_FACTURA (nro_factura,codigo_producto,nro_item,cantidad) VALUES (253,34,2893,1);
 INSERT INTO E01_DETALLE_FACTURA (nro_factura,codigo_producto,nro_item,cantidad) VALUES (251,45,2894,45);
 
-UPDATE e01_factura
-SET
+UPDATE e01_factura 
+SET 
     total_sin_iva = 0
 WHERE
     nro_factura < 1000;
-
+    
 CREATE OR REPLACE PROCEDURE calcular_precios() AS $$
 DECLARE
     v_nro_factura INTEGER DEFAULT 0;
@@ -3103,4 +3048,4 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CALL calcular_precios () ;
+CALL calcular_precios();
