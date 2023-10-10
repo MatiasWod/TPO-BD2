@@ -1,0 +1,18 @@
+{
+  "name": "tpo_bdd2",
+  "version": "1.0.0",
+  "description": "code base for MonstersAPI using postgresSQL and express.js",
+  "main": "database/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "pg": "^8.7.3",
+    "router": "^1.3.7"
+  }
+}
