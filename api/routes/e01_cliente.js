@@ -4,7 +4,7 @@ const router = Router();
 
 // POST route to insert data
 router.post("/insert", (request, response) => {
-    const { nro_cliente, nombre, apellido, direccion, activo } = request.body; // Assuming you have a JSON request body with name and email fields
+    const { nro_cliente, nombre, apellido, direccion, activo } = request.body;
 
     if (!nro_cliente || !nombre || !apellido || !direccion || !activo) {
         response.status(400).json({ error: "Todos los parámetros son requeridos para insertar el cliente en la tabla." });
@@ -26,7 +26,7 @@ router.post("/insert", (request, response) => {
 
 // POST route to insert data
 router.delete("/delete", (request, response) => {
-    const { nro_cliente } = request.body; // Assuming you have a JSON request body with name and email fields
+    const { nro_cliente } = request.body;
 
     if (!nro_cliente) {
         response.status(400).json({ error: "nro_cliente es requerido para borrar al cliente de la tabla." });
@@ -47,25 +47,46 @@ router.delete("/delete", (request, response) => {
 });
 
 router.put("/put", (request, response) => {
-    const { nro_cliente, nombre, apellido, direccion, activo } = request.body;  // Assuming you have a JSON request body with name and email fields
+    const { nro_cliente, nombre, apellido, direccion, activo } = request.body;
 
     if (!nro_cliente) {
         response.status(400).json({ error: "nro_cliente es requerido para actualizar al cliente de la tabla." });
         return;
     }
 
-    // SQL query to insert data into the e01_cliente table
-    const query = "UPDATE e01_cliente SET nombre = $2, apellido = $3 , direccion = $4, activo = $5 WHERE nro_cliente = ($1)";
-    const values = [nro_cliente,nombre,apellido,direccion,activo];
+    let updateQuery = "UPDATE e01_cliente SET";
+    const updateValues = [];
 
-    pool.query(query, values, (err, res) => {
+    if (nombre) {
+        updateQuery += ` nombre = $2,`;
+        updateValues.push(nombre);
+    }
+
+    if (direccion) {
+        updateQuery += ` direccion = $3,`;
+        updateValues.push(direccion);
+    }
+
+    // Remove the trailing comma, if any
+    updateQuery = updateQuery.replace(/,\s*$/, "");
+
+    updateQuery += " WHERE nro_cliente = $1";
+
+    updateValues.unshift(nro_cliente); // Add nro_cliente as the first parameter
+
+    console.log(updateQuery);
+
+    pool.query(updateQuery, updateValues, (err, res) => {
         if (err) {
             response.status(500).json({ error: err.message });
         } else {
-            response.status(201).json({ message: "Cliente actualizado correctamente." });
+            response.status(200).json({ message: "Cliente actualizado correctamente." });
         }
     });
 });
+
+
+
 
 
 module.exports = router;

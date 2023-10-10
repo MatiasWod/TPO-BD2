@@ -4,7 +4,7 @@ const router = Router();
 
 // POST route to insert data
 router.post("/insert", (request, response) => {
-    const { codigo_producto, marca, nombre, descripcion, precio, stock } = request.body; // Assuming you have a JSON request body with name and email fields
+    const { codigo_producto, marca, nombre, descripcion, precio, stock } = request.body;
 
     if (!codigo_producto || !marca || !nombre || !descripcion || !precio || !stock) {
         response.status(400).json({ error: "Todos los parámetros son requeridos para insertar el producto en la tabla." });
