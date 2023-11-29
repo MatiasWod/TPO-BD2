@@ -2,6 +2,13 @@ const { Router, response } = require("express");
 const pool = require("../database");
 const router = Router();
 
+router.get("/", (request, response) => {
+    pool.query("SELECT * FROM e01_cliente", (err, res) => {
+        if (err) response.end(err.message);
+        response.json(res.rows);
+    });
+});
+
 // POST route to insert data
 router.post("/insert", (request, response) => {
     const { nro_cliente, nombre, apellido, direccion, activo } = request.body;
